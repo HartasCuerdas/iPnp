@@ -14,6 +14,7 @@
 		76ED461619DF5B7100FB44A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76ED461519DF5B7100FB44A0 /* Images.xcassets */; };
 		76ED461919DF5B7100FB44A0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76ED461719DF5B7100FB44A0 /* LaunchScreen.xib */; };
 		76ED462519DF5B7100FB44A0 /* iPnpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED462419DF5B7100FB44A0 /* iPnpTests.m */; };
+		76ED463919DF607300FB44A0 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED463819DF607300FB44A0 /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		76ED461E19DF5B7100FB44A0 /* iPnpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iPnpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76ED462319DF5B7100FB44A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76ED462419DF5B7100FB44A0 /* iPnpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iPnpTests.m; sourceTree = "<group>"; };
+		76ED463719DF607300FB44A0 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		76ED463819DF607300FB44A0 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				76ED461519DF5B7100FB44A0 /* Images.xcassets */,
 				76ED461719DF5B7100FB44A0 /* LaunchScreen.xib */,
 				76ED460819DF5B7100FB44A0 /* Supporting Files */,
+				76ED463719DF607300FB44A0 /* TableViewController.h */,
+				76ED463819DF607300FB44A0 /* TableViewController.m */,
 			);
 			path = iPnp;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				76ED461119DF5B7100FB44A0 /* ViewController.m in Sources */,
 				76ED460E19DF5B7100FB44A0 /* AppDelegate.m in Sources */,
 				76ED460B19DF5B7100FB44A0 /* main.m in Sources */,
+				76ED463919DF607300FB44A0 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
