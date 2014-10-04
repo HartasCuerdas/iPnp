@@ -7,8 +7,12 @@
 //
 
 #import "TableViewController.h"
+#import "AFNetworking.h"
 
 @interface TableViewController ()
+
+@property (strong, nonatomic) NSArray *weeksArrayFromAFNetworking;
+@property (strong, nonatomic) NSArray *finishedWeeksArray;
 
 @end
 
@@ -16,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self makeWeeksRequests];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -34,21 +38,62 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.weeksArrayFromAFNetworking count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WeekCell" forIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WeekCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSString *CellIdentifier = @"WeekCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    NSDictionary *tempDictionary= [self.weeksArrayFromAFNetworking objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [tempDictionary objectForKey:@"firstDay"];
+    
+    if([tempDictionary objectForKey:@"comment"] != NULL)
+    {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"comment: %@",[tempDictionary   objectForKey:@"comment"]];
+    }
+    else
+    {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Not Rated"];
+    }
     
     return cell;
+}
+
+-(void)makeWeeksRequests
+{
+    NSURL *url = [NSURL URLWithString:@"http://localhost:3000/weeks"];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //AFNetworking asynchronous url request
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        self.weeksArrayFromAFNetworking = responseObject;
+        
+        NSLog(@"The Array: %@",self.weeksArrayFromAFNetworking);
+        
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+        
+    }];
+    
+    [operation start];
+    
 }
 
 /*
