@@ -1,5 +1,5 @@
 //
-//  TableViewController.m
+//  WeeksTableViewController.m
 //  iPnp
 //
 //  Created by Franco Cedillo on 10/3/14.

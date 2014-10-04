@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  WeekViewController.m
 //  iPnp
 //
 //  Created by Franco Cedillo on 10/3/14.
@@ -7,6 +7,7 @@
 //
 
 #import "WeekViewController.h"
+#import "DayViewController.h"
 #import "AFNetworking.h"
 
 @interface WeekViewController ()
@@ -60,16 +61,18 @@
     NSDictionary *tempDictionary= [self.daysArray objectAtIndex:indexPath.row];
     cell.textLabel.text = [tempDictionary objectForKey:@"date"];
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
 
 -(void)makeDaysRequests
 {
     
-    integer_t day_id = [[self.weekDetail objectForKey:@"id"] integerValue];
+    integer_t week_id = [[self.weekDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://localhost:3000/weeks/%d/days", day_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"http://localhost:3000/weeks/%d/days", week_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.daysArray = responseObject;
         NSLog(@"Days Array: %@",self.daysArray);
         [self.daysTableView reloadData];
@@ -77,6 +80,15 @@
         NSLog(@"Request Failed: %@, %@", error, error.userInfo);
     }];
     
+}
+
+#pragma mark - Prepare For Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath = [self.daysTableView indexPathForSelectedRow];
+    DayViewController *dayViewController = (DayViewController *)segue.destinationViewController;
+    dayViewController.dayDetail = [self.daysArray objectAtIndex:indexPath.row];
 }
 
 - (void)didReceiveMemoryWarning {
