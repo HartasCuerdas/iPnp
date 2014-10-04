@@ -7,6 +7,7 @@
 //
 
 #import "TableViewController.h"
+#import "ViewController.h"
 #import "AFNetworking.h"
 
 @interface TableViewController ()
@@ -83,6 +84,15 @@
     
     [operation start];
     
+}
+
+#pragma mark - Prepare For Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    ViewController *weekDetailViewController = (ViewController *)segue.destinationViewController;
+    weekDetailViewController.weekDetail = [self.weeksArrayFromAFNetworking objectAtIndex:indexPath.row];
 }
 
 /*
