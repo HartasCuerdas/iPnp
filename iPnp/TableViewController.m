@@ -55,15 +55,6 @@
     
     cell.textLabel.text = [tempDictionary objectForKey:@"firstDay"];
     
-    if([tempDictionary objectForKey:@"comment"] != NULL)
-    {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"comment: %@",[tempDictionary   objectForKey:@"comment"]];
-    }
-    else
-    {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"Not Rated"];
-    }
-    
     return cell;
 }
 
