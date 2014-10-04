@@ -6,20 +6,19 @@
 //  Copyright (c) 2014 HartasCuerdas. All rights reserved.
 //
 
-#import "TableViewController.h"
-#import "ViewController.h"
+#import "WeeksTableViewController.h"
+#import "WeekViewController.h"
 #import "AFNetworking.h"
 
-@interface TableViewController ()
+@interface WeeksTableViewController ()
 
-@property (strong, nonatomic) NSArray *weeksArrayFromAFNetworking;
-@property (strong, nonatomic) NSArray *finishedWeeksArray;
+@property (strong, nonatomic) NSArray *weeksArray;
 
 @end
 
 
 
-@implementation TableViewController
+@implementation WeeksTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +35,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark - Weeks table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
@@ -45,7 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.weeksArrayFromAFNetworking count];
+    return [self.weeksArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,7 +53,7 @@
     static NSString *CellIdentifier = @"WeekCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *tempDictionary= [self.weeksArrayFromAFNetworking objectAtIndex:indexPath.row];
+    NSDictionary *tempDictionary= [self.weeksArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [tempDictionary objectForKey:@"firstDay"];
     
@@ -72,9 +71,9 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        self.weeksArrayFromAFNetworking = responseObject;
+        self.weeksArray = responseObject;
         
-        NSLog(@"The Array: %@",self.weeksArrayFromAFNetworking);
+        NSLog(@"Weeks Array: %@",self.weeksArray);
         
         [self.tableView reloadData];
         
@@ -93,8 +92,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    ViewController *weekDetailViewController = (ViewController *)segue.destinationViewController;
-    weekDetailViewController.weekDetail = [self.weeksArrayFromAFNetworking objectAtIndex:indexPath.row];
+    WeekViewController *weekViewController = (WeekViewController *)segue.destinationViewController;
+    weekViewController.weekDetail = [self.weeksArray objectAtIndex:indexPath.row];
 }
 
 /*

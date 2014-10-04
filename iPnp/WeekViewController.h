@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface WeekViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *weekDetail;
 
