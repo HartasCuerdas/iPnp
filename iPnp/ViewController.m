@@ -21,6 +21,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.firstDayLabel.text = [self.weekDetail objectForKey:@"firstDay"];
+    
+    double oAVG = [[self.weekDetail objectForKey:@"oAVG"] doubleValue];
+    self.oAvgLabel.text = [NSString stringWithFormat:@"%.1f", oAVG];
+    
+    double dAVG = [[self.weekDetail objectForKey:@"dAVG"] doubleValue];
+    self.dAvgLabel.text = [NSString stringWithFormat:@"%.1f", dAVG];
+    
 }
 
 - (void)didReceiveMemoryWarning {
