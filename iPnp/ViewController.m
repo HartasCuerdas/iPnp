@@ -10,6 +10,10 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *firstDayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *oAvgLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dAvgLabel;
+
 @end
 
 @implementation ViewController
