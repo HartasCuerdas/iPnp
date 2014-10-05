@@ -48,13 +48,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WeekCell" forIndexPath:indexPath];
     
     static NSString *CellIdentifier = @"WeekCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *tempDictionary= [self.weeksArray objectAtIndex:indexPath.row];
-    
     cell.textLabel.text = [tempDictionary objectForKey:@"firstDay"];
     
     return cell;
