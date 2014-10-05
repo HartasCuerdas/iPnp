@@ -55,13 +55,25 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"DayCell";
-    //UITableViewCell *cell = [self.daysTableView dequeueReusableCellWithIdentifier:@"DayCell"];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *tempDictionary= [self.daysArray objectAtIndex:indexPath.row];
     cell.textLabel.text = [tempDictionary objectForKey:@"date"];
+
+    bool wr = [[tempDictionary objectForKey:@"wr"] boolValue];
+    NSString *strWr = @"";
+    UIColor *color = nil;
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (wr) {
+        strWr = @"Well";
+        color = [UIColor blueColor];
+    } else {
+        strWr = @"Poor";
+        color = [UIColor redColor];
+    }
+    
+    cell.detailTextLabel.text = strWr;
+    cell.detailTextLabel.textColor = color;
     
     return cell;
 }

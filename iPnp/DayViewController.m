@@ -12,6 +12,7 @@
 @interface DayViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wrLabel;
 @property (weak, nonatomic) IBOutlet UILabel *oTotalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dTotalLabel;
 
@@ -28,6 +29,16 @@
 
     // Do any additional setup after loading the view, typically from a nib.
     self.dateLabel.text = [self.dayDetail objectForKey:@"date"];
+
+    bool wr = [[self.dayDetail objectForKey:@"wr"] boolValue];
+    NSString *strWr = @"";
+    if (wr) {
+        strWr = @"Well";
+    } else {
+        strWr = @"Poor";
+    }
+
+    self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
     
     integer_t oTotal = [[self.dayDetail objectForKey:@"oTotal"] integerValue];
     self.oTotalLabel.text = [NSString stringWithFormat:@"%d", oTotal];
@@ -52,7 +63,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"OdCell";
-    //UITableViewCell *cell = [self.daysTableView dequeueReusableCellWithIdentifier:@"DayCell"];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *tempDictionary= [self.odsArray objectAtIndex:indexPath.row];
