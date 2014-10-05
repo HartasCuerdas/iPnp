@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wrLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *wrSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *oTotalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dTotalLabel;
 
@@ -34,8 +35,10 @@
     NSString *strWr = @"";
     if (wr) {
         strWr = @"Well";
+        [self.wrSwitch setOn:YES];
     } else {
         strWr = @"Poor";
+        [self.wrSwitch setOn:NO];
     }
 
     self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
