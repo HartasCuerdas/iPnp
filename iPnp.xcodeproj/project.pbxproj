@@ -17,6 +17,7 @@
 		76ED462519DF5B7100FB44A0 /* iPnpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED462419DF5B7100FB44A0 /* iPnpTests.m */; };
 		76ED463919DF607300FB44A0 /* WeeksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED463819DF607300FB44A0 /* WeeksTableViewController.m */; };
 		76ED464219E0AD9400FB44A0 /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED464119E0AD9400FB44A0 /* DayViewController.m */; };
+		76ED464A19E0FAA900FB44A0 /* OdCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76ED464919E0FAA900FB44A0 /* OdCustomCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		76ED463819DF607300FB44A0 /* WeeksTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeeksTableViewController.m; sourceTree = "<group>"; };
 		76ED464019E0AD9400FB44A0 /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewController.h; sourceTree = "<group>"; };
 		76ED464119E0AD9400FB44A0 /* DayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewController.m; sourceTree = "<group>"; };
+		76ED464819E0FAA900FB44A0 /* OdCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OdCustomCell.h; sourceTree = "<group>"; };
+		76ED464919E0FAA900FB44A0 /* OdCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OdCustomCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 				76ED461019DF5B7100FB44A0 /* WeekViewController.m */,
 				76ED464019E0AD9400FB44A0 /* DayViewController.h */,
 				76ED464119E0AD9400FB44A0 /* DayViewController.m */,
+				76ED464819E0FAA900FB44A0 /* OdCustomCell.h */,
+				76ED464919E0FAA900FB44A0 /* OdCustomCell.m */,
 				76ED460C19DF5B7100FB44A0 /* AppDelegate.h */,
 				76ED460D19DF5B7100FB44A0 /* AppDelegate.m */,
 				76ED461519DF5B7100FB44A0 /* Images.xcassets */,
@@ -291,6 +296,7 @@
 				76ED461119DF5B7100FB44A0 /* WeekViewController.m in Sources */,
 				76ED460E19DF5B7100FB44A0 /* AppDelegate.m in Sources */,
 				76ED460B19DF5B7100FB44A0 /* main.m in Sources */,
+				76ED464A19E0FAA900FB44A0 /* OdCustomCell.m in Sources */,
 				76ED463919DF607300FB44A0 /* WeeksTableViewController.m in Sources */,
 				76ED464219E0AD9400FB44A0 /* DayViewController.m in Sources */,
 			);

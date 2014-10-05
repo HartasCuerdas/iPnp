@@ -7,6 +7,7 @@
 //
 
 #import "DayViewController.h"
+#import "OdCustomCell.h"
 #import "AFNetworking.h"
 
 @interface DayViewController ()
@@ -66,10 +67,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"OdCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *tempDictionary= [self.odsArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [tempDictionary objectForKey:@"timekey"];
+    //cell.textLabel.text = [tempDictionary objectForKey:@"timekey"];
+
+    OdCustomCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    cell.timekeyLabel.text = [tempDictionary objectForKey:@"timekey"];
+    bool o = [[tempDictionary objectForKey:@"o"] boolValue];
+    bool d = [[tempDictionary objectForKey:@"d"] boolValue];
+    if (o) {
+        [cell.oSwitch setOn:YES];
+    } else {
+        [cell.oSwitch setOn:NO];
+    }
+    if (d) {
+        [cell.dSwitch setOn:YES];
+    } else {
+        [cell.dSwitch setOn:NO];
+    }
     
     return cell;
 }
