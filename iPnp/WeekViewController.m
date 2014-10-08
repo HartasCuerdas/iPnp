@@ -93,7 +93,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Request Failed: %@, %@", error, error.userInfo);
     }];
-    
 }
 
 #pragma mark - Prepare For Segue
