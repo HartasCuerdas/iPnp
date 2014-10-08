@@ -26,7 +26,8 @@
 
 @implementation DayViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
@@ -34,7 +35,6 @@
     [self LoadDayDetail];
     
     [self makeOdsRequests];
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)daysTableView {
@@ -72,7 +72,6 @@
     return cell;
 }
 
--(void)makeOdsRequests
 # pragma mark - Some methods
 
 - (void)LoadDayDetail
@@ -101,6 +100,8 @@
     self.dTotalLabel.text = [NSString stringWithFormat:@"%d", dTotal];
 }
 
+- (void)makeOdsRequests
+{
     integer_t day_id = [[self.dayDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -111,6 +112,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Request Failed: %@, %@", error, error.userInfo);
     }];
+}
 
 # pragma mark -  Switchs State Changed
 - (void)wrStateChanged:(UISwitch *)switchState
