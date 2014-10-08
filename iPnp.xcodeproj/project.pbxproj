@@ -105,19 +105,8 @@
 		76ED460719DF5B7100FB44A0 /* iPnp */ = {
 			isa = PBXGroup;
 			children = (
-				76ED461219DF5B7100FB44A0 /* Main.storyboard */,
-				76ED463719DF607300FB44A0 /* WeeksTableViewController.h */,
-				76ED463819DF607300FB44A0 /* WeeksTableViewController.m */,
-				76ED460F19DF5B7100FB44A0 /* WeekViewController.h */,
-				76ED461019DF5B7100FB44A0 /* WeekViewController.m */,
-				76ED464019E0AD9400FB44A0 /* DayViewController.h */,
-				76ED464119E0AD9400FB44A0 /* DayViewController.m */,
-				76ED464819E0FAA900FB44A0 /* OdCustomCell.h */,
-				76ED464919E0FAA900FB44A0 /* OdCustomCell.m */,
-				76ED460C19DF5B7100FB44A0 /* AppDelegate.h */,
-				76ED460D19DF5B7100FB44A0 /* AppDelegate.m */,
-				76ED461519DF5B7100FB44A0 /* Images.xcassets */,
-				76ED461719DF5B7100FB44A0 /* LaunchScreen.xib */,
+				76ED464B19E35E7F00FB44A0 /* Controllers */,
+				76ED464C19E35EEB00FB44A0 /* other */,
 				76ED460819DF5B7100FB44A0 /* Supporting Files */,
 			);
 			path = iPnp;
@@ -147,6 +136,33 @@
 				76ED462319DF5B7100FB44A0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76ED464B19E35E7F00FB44A0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				76ED463719DF607300FB44A0 /* WeeksTableViewController.h */,
+				76ED463819DF607300FB44A0 /* WeeksTableViewController.m */,
+				76ED460F19DF5B7100FB44A0 /* WeekViewController.h */,
+				76ED461019DF5B7100FB44A0 /* WeekViewController.m */,
+				76ED464019E0AD9400FB44A0 /* DayViewController.h */,
+				76ED464119E0AD9400FB44A0 /* DayViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		76ED464C19E35EEB00FB44A0 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				76ED464819E0FAA900FB44A0 /* OdCustomCell.h */,
+				76ED464919E0FAA900FB44A0 /* OdCustomCell.m */,
+				76ED460C19DF5B7100FB44A0 /* AppDelegate.h */,
+				76ED460D19DF5B7100FB44A0 /* AppDelegate.m */,
+				76ED461519DF5B7100FB44A0 /* Images.xcassets */,
+				76ED461719DF5B7100FB44A0 /* LaunchScreen.xib */,
+				76ED461219DF5B7100FB44A0 /* Main.storyboard */,
+			);
+			name = other;
 			sourceTree = "<group>";
 		};
 		F18F4DD6D9C5FA7EB26ABE81 /* Pods */ = {
