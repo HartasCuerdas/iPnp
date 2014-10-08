@@ -16,10 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *oAvgLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dAvgLabel;
 
-@property (strong, nonatomic) IBOutlet UITableView *daysTableView;
-
-@property (strong, nonatomic) NSArray *daysArray;
-
 @end
 
 
