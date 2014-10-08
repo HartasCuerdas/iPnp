@@ -30,13 +30,7 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
-    self.firstDayLabel.text = [self.weekDetail objectForKey:@"firstDay"];
-    
-    double oAVG = [[self.weekDetail objectForKey:@"oAVG"] doubleValue];
-    self.oAvgLabel.text = [NSString stringWithFormat:@"%.1f", oAVG];
-    
-    double dAVG = [[self.weekDetail objectForKey:@"dAVG"] doubleValue];
-    self.dAvgLabel.text = [NSString stringWithFormat:@"%.1f", dAVG];
+    [self LoadWeekDetail];
     
     [self makeDaysRequests];
     
@@ -79,8 +73,17 @@
 }
 
 -(void)makeDaysRequests
+
+- (void)LoadWeekDetail
 {
+    self.firstDayLabel.text = [self.weekDetail objectForKey:@"firstDay"];
     
+    double oAVG = [[self.weekDetail objectForKey:@"oAVG"] doubleValue];
+    self.oAvgLabel.text = [NSString stringWithFormat:@"%.1f", oAVG];
+    
+    double dAVG = [[self.weekDetail objectForKey:@"dAVG"] doubleValue];
+    self.dAvgLabel.text = [NSString stringWithFormat:@"%.1f", dAVG];
+}
     integer_t week_id = [[self.weekDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
