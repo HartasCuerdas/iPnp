@@ -30,25 +30,8 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
-    self.dateLabel.text = [self.dayDetail objectForKey:@"date"];
 
-    bool wr = [[self.dayDetail objectForKey:@"wr"] boolValue];
-    NSString *strWr = @"";
-    if (wr) {
-        strWr = @"Well";
-        [self.wrSwitch setOn:YES];
-    } else {
-        strWr = @"Poor";
-        [self.wrSwitch setOn:NO];
-    }
-
-    self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
-    
-    integer_t oTotal = [[self.dayDetail objectForKey:@"oTotal"] integerValue];
-    self.oTotalLabel.text = [NSString stringWithFormat:@"%d", oTotal];
-    
-    integer_t dTotal = [[self.dayDetail objectForKey:@"dTotal"] integerValue];
-    self.dTotalLabel.text = [NSString stringWithFormat:@"%d", dTotal];
+    [self LoadDayDetail];
     
     [self makeOdsRequests];
     
@@ -92,8 +75,32 @@
 }
 
 -(void)makeOdsRequests
+- (void)LoadDayDetail
 {
+    self.dateLabel.text = [self.dayDetail objectForKey:@"date"];
     
+    bool wr = [[self.dayDetail objectForKey:@"wr"] boolValue];
+    NSString *strWr = @"";
+    if (wr) {
+        strWr = @"Well";
+        [self.wrSwitch setOn:YES];
+    } else {
+        strWr = @"Poor";
+        [self.wrSwitch setOn:NO];
+    }
+    
+    [self.wrSwitch addTarget:self
+                     action:@selector(wrStateChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
+    
+    integer_t oTotal = [[self.dayDetail objectForKey:@"oTotal"] integerValue];
+    self.oTotalLabel.text = [NSString stringWithFormat:@"%d", oTotal];
+    
+    integer_t dTotal = [[self.dayDetail objectForKey:@"dTotal"] integerValue];
+    self.dTotalLabel.text = [NSString stringWithFormat:@"%d", dTotal];
+}
+
     integer_t day_id = [[self.dayDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
