@@ -72,6 +72,12 @@
         [cell.dSwitch setOn:NO];
     }
     
+    [cell.oSwitch addTarget:self
+                     action:@selector(oStateChanged:) forControlEvents:UIControlEventValueChanged];
+
+    [cell.dSwitch addTarget:self
+                     action:@selector(dStateChanged:) forControlEvents:UIControlEventValueChanged];
+    
     return cell;
 }
 
@@ -141,7 +147,65 @@
         NSLog(@"Request Failed: %@, %@", error, error.userInfo);
     }];
 }
+
+- (void)oStateChanged:(id)sender
+{
+    CGPoint switchPositionPoint = [sender convertPoint:CGPointZero toView:[self odsTableView]];
+    NSIndexPath *indexPath = [[self odsTableView] indexPathForRowAtPoint:switchPositionPoint];
     
+    integer_t od_id = [[[self.odsArray objectAtIndex:indexPath.row] objectForKey:@"id"] integerValue];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager
+        PATCH:[NSString stringWithFormat:@"http://localhost:3000/ods/%d/toggle_o", od_id ]
+        parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            self.dayDetail = responseObject[@"day"];
+            self.weekDetail = responseObject[@"week"];
+            
+            integer_t oTotal = [[self.dayDetail objectForKey:@"oTotal"] integerValue];
+            self.oTotalLabel.text = [NSString stringWithFormat:@"%d", oTotal];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+        }
+    ];
+}
+
+- (void)dStateChanged:(id)sender
+{
+    CGPoint switchPositionPoint = [sender convertPoint:CGPointZero toView:[self odsTableView]];
+    NSIndexPath *indexPath = [[self odsTableView] indexPathForRowAtPoint:switchPositionPoint];
+    integer_t od_id = [[[self.odsArray objectAtIndex:indexPath.row] objectForKey:@"id"] integerValue];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager
+        PATCH:[NSString stringWithFormat:@"http://localhost:3000/ods/%d/toggle_d", od_id ]
+        parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            self.dayDetail = responseObject[@"day"];
+            self.weekDetail = responseObject[@"week"];
+            
+            integer_t dTotal = [[self.dayDetail objectForKey:@"dTotal"] integerValue];
+            self.dTotalLabel.text = [NSString stringWithFormat:@"%d", dTotal];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+        }
+    ];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    int currentVCIndex = [self.navigationController.viewControllers indexOfObject:self.navigationController.topViewController];
+    WeekViewController *parent = (WeekViewController *)[self.navigationController.viewControllers objectAtIndex:currentVCIndex];
+    NSIndexPath *indexPath = [parent.daysTableView indexPathForSelectedRow];
+    [parent.daysArray replaceObjectAtIndex:indexPath.row withObject:self.dayDetail];
+    parent.weekDetail = self.weekDetail;
+    [parent LoadWeekDetail];
+    [parent.daysTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
