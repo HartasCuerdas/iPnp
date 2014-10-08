@@ -26,14 +26,14 @@
 
 @implementation WeekViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     // Do any additional setup after loading the view, typically from a nib.
     [self LoadWeekDetail];
     
     [self makeDaysRequests];
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)daysTableView {
@@ -46,8 +46,8 @@
     return  [self.daysArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"DayCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -72,7 +72,6 @@
     return cell;
 }
 
--(void)makeDaysRequests
 
 - (void)LoadWeekDetail
 {
@@ -84,6 +83,9 @@
     double dAVG = [[self.weekDetail objectForKey:@"dAVG"] doubleValue];
     self.dAvgLabel.text = [NSString stringWithFormat:@"%.1f", dAVG];
 }
+
+- (void)makeDaysRequests
+{
     integer_t week_id = [[self.weekDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -99,7 +101,7 @@
 
 #pragma mark - Prepare For Segue
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [self.daysTableView indexPathForSelectedRow];
     DayViewController *dayViewController = (DayViewController *)segue.destinationViewController;
