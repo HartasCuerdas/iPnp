@@ -68,6 +68,7 @@
     return cell;
 }
 
+# pragma mark - Some methods
 
 - (void)LoadWeekDetail
 {
