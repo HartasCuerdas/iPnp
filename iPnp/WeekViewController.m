@@ -87,7 +87,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[NSString stringWithFormat:@"http://localhost:3000/weeks/%d/days", week_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.daysArray = responseObject;
+        self.daysArray = [NSMutableArray arrayWithArray:responseObject];
         //NSLog(@"Days Array: %@",self.daysArray);
         [self.daysTableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
