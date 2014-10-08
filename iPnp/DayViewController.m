@@ -109,6 +109,31 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Request Failed: %@, %@", error, error.userInfo);
     }];
+
+# pragma mark -  Switchs State Changed
+- (void)wrStateChanged:(UISwitch *)switchState
+{
+    integer_t day_id = [[self.dayDetail objectForKey:@"id"] integerValue];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager PATCH:[NSString stringWithFormat:@"http://localhost:3000/days/%d/toggle_wr", day_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        self.dayDetail = responseObject[@"day"];
+        self.weekDetail = responseObject[@"week"];
+        
+        bool wr = [[self.dayDetail objectForKey:@"wr"] boolValue];
+        NSString *strWr = @"";
+        if (wr) {
+            strWr = @"Well";
+        } else {
+            strWr = @"Poor";
+        }
+        self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+    }];
+}
     
 }
 
