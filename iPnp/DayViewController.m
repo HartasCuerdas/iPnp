@@ -21,7 +21,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *odsTableView;
 
-@property (strong, nonatomic) NSArray *odsArray;
 @property (strong, nonatomic) NSMutableArray *odsArray;
 
 @property (strong, nonatomic) NSDictionary *weekDetail;
@@ -51,13 +50,13 @@
     return  [self.odsArray count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"OdCell";
-    
-    NSDictionary *tempDictionary= [self.odsArray objectAtIndex:indexPath.row];
 
     OdCustomCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    NSDictionary *tempDictionary = [self.odsArray objectAtIndex:indexPath.row];
     
     cell.timekeyLabel.text = [tempDictionary objectForKey:@"timekey"];
     bool o = [[tempDictionary objectForKey:@"o"] boolValue];
@@ -74,10 +73,12 @@
     }
     
     [cell.oSwitch addTarget:self
-                     action:@selector(oStateChanged:) forControlEvents:UIControlEventValueChanged];
-
+                     action:@selector(oStateChanged:)
+           forControlEvents:UIControlEventValueChanged];
+    
     [cell.dSwitch addTarget:self
-                     action:@selector(dStateChanged:) forControlEvents:UIControlEventValueChanged];
+                     action:@selector(dStateChanged:)
+           forControlEvents:UIControlEventValueChanged];
     
     return cell;
 }
