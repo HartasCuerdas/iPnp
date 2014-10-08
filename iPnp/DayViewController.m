@@ -23,6 +23,8 @@
 
 @property (strong, nonatomic) NSArray *odsArray;
 
+@property (strong, nonatomic) NSDictionary *weekDetail;
+
 @end
 
 @implementation DayViewController
