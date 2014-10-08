@@ -50,10 +50,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"OdCell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     NSDictionary *tempDictionary= [self.odsArray objectAtIndex:indexPath.row];
-    //cell.textLabel.text = [tempDictionary objectForKey:@"timekey"];
 
     OdCustomCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
@@ -106,7 +104,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[NSString stringWithFormat:@"http://localhost:3000/days/%d/ods", day_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         self.odsArray = responseObject;
-        NSLog(@"Ods Array: %@",self.odsArray);
+        //NSLog(@"Ods Array: %@",self.odsArray);
         [self.odsTableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Request Failed: %@, %@", error, error.userInfo);
