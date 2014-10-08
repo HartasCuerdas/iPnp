@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *odsTableView;
 
 @property (strong, nonatomic) NSArray *odsArray;
+@property (strong, nonatomic) NSMutableArray *odsArray;
 
 @property (strong, nonatomic) NSDictionary *weekDetail;
 
@@ -115,7 +116,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:[NSString stringWithFormat:@"http://localhost:3000/days/%d/ods", day_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.odsArray = responseObject;
+        self.odsArray = [NSMutableArray arrayWithArray:responseObject];
         //NSLog(@"Ods Array: %@",self.odsArray);
         [self.odsTableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -163,6 +164,7 @@
         {
             self.dayDetail = responseObject[@"day"];
             self.weekDetail = responseObject[@"week"];
+            [self.odsArray replaceObjectAtIndex:indexPath.row withObject:responseObject[@"od"]];
             
             integer_t oTotal = [[self.dayDetail objectForKey:@"oTotal"] integerValue];
             self.oTotalLabel.text = [NSString stringWithFormat:@"%d", oTotal];
@@ -187,6 +189,7 @@
         {
             self.dayDetail = responseObject[@"day"];
             self.weekDetail = responseObject[@"week"];
+            [self.odsArray replaceObjectAtIndex:indexPath.row withObject:responseObject[@"od"]];
             
             integer_t dTotal = [[self.dayDetail objectForKey:@"dTotal"] integerValue];
             self.dTotalLabel.text = [NSString stringWithFormat:@"%d", dTotal];
