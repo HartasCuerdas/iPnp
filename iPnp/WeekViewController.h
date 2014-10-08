@@ -11,6 +11,10 @@
 @interface WeekViewController : UIViewController
 
 @property (strong, nonatomic) NSDictionary *weekDetail;
+@property (strong, nonatomic) IBOutlet UITableView *daysTableView;
+@property (strong, nonatomic) NSMutableArray *daysArray;
+
+- (void)LoadWeekDetail;
 
 @end
 
