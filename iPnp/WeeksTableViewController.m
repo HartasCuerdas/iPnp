@@ -71,7 +71,7 @@
         
         self.weeksArray = responseObject;
         
-        NSLog(@"Weeks Array: %@",self.weeksArray);
+        //NSLog(@"Weeks Array: %@",self.weeksArray);
         
         [self.tableView reloadData];
         
