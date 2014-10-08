@@ -8,6 +8,7 @@
 
 #import "DayViewController.h"
 #import "OdCustomCell.h"
+#import "WeekViewController.h"
 #import "AFNetworking.h"
 
 @interface DayViewController ()
