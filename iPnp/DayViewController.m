@@ -54,7 +54,8 @@
 {
     static NSString *CellIdentifier = @"OdCell";
 
-    OdCustomCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    OdCustomCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                          forIndexPath:indexPath];
 
     NSDictionary *tempDictionary = [self.odsArray objectAtIndex:indexPath.row];
     
@@ -116,13 +117,19 @@
     integer_t day_id = [[self.dayDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://localhost:3000/days/%d/ods", day_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.odsArray = [NSMutableArray arrayWithArray:responseObject];
-        //NSLog(@"Ods Array: %@",self.odsArray);
-        [self.odsTableView reloadData];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Request Failed: %@, %@", error, error.userInfo);
-    }];
+    [manager
+        GET:[NSString stringWithFormat:@"http://localhost:3000/days/%d/ods", day_id ]
+        parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            self.odsArray = [NSMutableArray arrayWithArray:responseObject];
+            [self.odsTableView reloadData];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+        {
+            NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+        }
+     ];
 }
 
 # pragma mark -  Switchs State Changed
@@ -131,23 +138,28 @@
     integer_t day_id = [[self.dayDetail objectForKey:@"id"] integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager PATCH:[NSString stringWithFormat:@"http://localhost:3000/days/%d/toggle_wr", day_id ] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        self.dayDetail = responseObject[@"day"];
-        self.weekDetail = responseObject[@"week"];
-        
-        bool wr = [[self.dayDetail objectForKey:@"wr"] boolValue];
-        NSString *strWr = @"";
-        if (wr) {
-            strWr = @"Well";
-        } else {
-            strWr = @"Poor";
+    [manager
+        PATCH:[NSString stringWithFormat:@"http://localhost:3000/days/%d/toggle_wr", day_id ]
+        parameters:nil
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            self.dayDetail = responseObject[@"day"];
+            self.weekDetail = responseObject[@"week"];
+            
+            bool wr = [[self.dayDetail objectForKey:@"wr"] boolValue];
+            NSString *strWr = @"";
+            if (wr) {
+                strWr = @"Well";
+            } else {
+                strWr = @"Poor";
+            }
+            self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
         }
-        self.wrLabel.text = [NSString stringWithFormat:@"%@", strWr];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Request Failed: %@, %@", error, error.userInfo);
-    }];
+        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+        {
+            NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+        }
+    ];
 }
 
 - (void)oStateChanged:(id)sender
@@ -155,7 +167,8 @@
     CGPoint switchPositionPoint = [sender convertPoint:CGPointZero toView:[self odsTableView]];
     NSIndexPath *indexPath = [[self odsTableView] indexPathForRowAtPoint:switchPositionPoint];
     
-    integer_t od_id = [[[self.odsArray objectAtIndex:indexPath.row] objectForKey:@"id"] integerValue];
+    integer_t od_id = [[[self.odsArray objectAtIndex:indexPath.row] objectForKey:@"id"]
+                       integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager
@@ -180,7 +193,8 @@
 {
     CGPoint switchPositionPoint = [sender convertPoint:CGPointZero toView:[self odsTableView]];
     NSIndexPath *indexPath = [[self odsTableView] indexPathForRowAtPoint:switchPositionPoint];
-    integer_t od_id = [[[self.odsArray objectAtIndex:indexPath.row] objectForKey:@"id"] integerValue];
+    integer_t od_id = [ [[self.odsArray objectAtIndex:indexPath.row] objectForKey:@"id"]
+                       integerValue];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager
@@ -203,8 +217,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    int currentVCIndex = [self.navigationController.viewControllers indexOfObject:self.navigationController.topViewController];
-    WeekViewController *parent = (WeekViewController *)[self.navigationController.viewControllers objectAtIndex:currentVCIndex];
+    int currentVCIndex = [self.navigationController.viewControllers
+                          indexOfObject:self.navigationController.topViewController];
+    WeekViewController *parent = (WeekViewController *)[self.navigationController.viewControllers
+                                                        objectAtIndex:currentVCIndex];
     NSIndexPath *indexPath = [parent.daysTableView indexPathForSelectedRow];
     [parent.daysArray replaceObjectAtIndex:indexPath.row withObject:self.dayDetail];
     parent.weekDetail = self.weekDetail;
