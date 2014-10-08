@@ -73,6 +73,8 @@
 }
 
 -(void)makeOdsRequests
+# pragma mark - Some methods
+
 - (void)LoadDayDetail
 {
     self.dateLabel.text = [self.dayDetail objectForKey:@"date"];
