@@ -122,6 +122,15 @@
 }
 */
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tv
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < [self.weeksArray count] ) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleInsert;
+    }
+}
+
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
