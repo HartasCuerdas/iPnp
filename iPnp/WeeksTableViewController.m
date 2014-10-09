@@ -166,9 +166,26 @@
                 NSLog(@"Request Failed: %@, %@", error, error.userInfo);
             }
         ];
-    }// else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert)
+    {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    //}
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager
+             POST: @"http://localhost:3000/weeks"
+             parameters:nil
+             success:^(AFHTTPRequestOperation *operation, id responseObject)
+             {
+                 [self.tableView beginUpdates];
+                 [self.weeksArray addObject:responseObject];
+                 [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                 [self.tableView endUpdates];
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+             }
+         ];
+    }
 }
 
 /*
