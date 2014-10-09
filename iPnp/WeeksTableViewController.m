@@ -35,6 +35,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)setEditing:(BOOL)editing animated:(BOOL) animated {
+    [super setEditing:editing animated:animated];
+    [self.tableView setEditing:editing animated:animated];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Weeks table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
