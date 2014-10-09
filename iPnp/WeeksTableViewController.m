@@ -12,7 +12,7 @@
 
 @interface WeeksTableViewController ()
 
-@property (strong, nonatomic) NSArray *weeksArray;
+@property (strong, nonatomic) NSMutableArray *weeksArray;
 
 @end
 
@@ -146,17 +146,18 @@
     }
 }
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        [self.tableView beginUpdates];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.weeksArray removeObjectAtIndex:indexPath.row];
+        [self.tableView endUpdates];
+    }// else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    //}
 }
-*/
 
 /*
 // Override to support rearranging the table view.
