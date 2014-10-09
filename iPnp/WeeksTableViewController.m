@@ -148,12 +148,28 @@
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
         // Delete the row from the data source
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.weeksArray removeObjectAtIndex:indexPath.row];
-        [self.tableView endUpdates];
+        
+        NSDictionary *tempDictionary= [self.weeksArray objectAtIndex:indexPath.row];
+        integer_t week_id = [[tempDictionary objectForKey:@"id"] integerValue];
+
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager
+            DELETE:[NSString stringWithFormat:@"http://localhost:3000/weeks/%id", week_id ]
+            parameters:nil
+            success:^(AFHTTPRequestOperation *operation, id responseObject)
+            {
+                [self.tableView beginUpdates];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.weeksArray removeObjectAtIndex:indexPath.row];
+                [self.tableView endUpdates];
+            }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+            }
+        ];
     }// else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     //}
