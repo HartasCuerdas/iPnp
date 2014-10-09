@@ -100,22 +100,18 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        self.weeksArray = responseObject;
-        
-        //NSLog(@"Weeks Array: %@",self.weeksArray);
-        
-        [self.tableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        NSLog(@"Request Failed: %@, %@", error, error.userInfo);
-        
-    }];
+    [operation
+        setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+        {
+            self.weeksArray = [NSMutableArray arrayWithArray:responseObject];
+            [self.tableView reloadData];
+        }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Request Failed: %@, %@", error, error.userInfo);
+        }
+     ];
     
     [operation start];
-    
 }
 
 #pragma mark - Navigation
