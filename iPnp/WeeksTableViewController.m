@@ -56,8 +56,16 @@
     static NSString *CellIdentifier = @"WeekCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *tempDictionary= [self.weeksArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [tempDictionary objectForKey:@"firstDay"];
+    if (indexPath.row < [self.weeksArray count] )
+    {
+        NSDictionary *tempDictionary= [self.weeksArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [tempDictionary objectForKey:@"firstDay"];
+    }
+    else
+    {
+        cell.textLabel.text = @"Add New Week";
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+    }
     
     return cell;
 }
